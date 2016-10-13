@@ -1,6 +1,6 @@
 <?php
 class Fuga {
-	public function index() {
-		return true;
-	}
+  public function index() {
+    return true;
+  }
 }
