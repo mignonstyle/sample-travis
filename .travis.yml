@@ -5,5 +5,5 @@ php:
   - 7
   - hhvm
 
-script: phpunit tests/Test.php
-  phpunit tests/stacktest.php
+script:
+  phpunit tests
