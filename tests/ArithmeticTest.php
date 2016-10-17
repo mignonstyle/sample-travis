@@ -61,6 +61,6 @@ class ArithmeticTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 3, $this->object->divide( 6, 2 ) );
 
 		// 引数に6, 6を渡すと1が帰ってくることを確認する
-		$this->assertEquals( 1, $this->object->divide( 6, 6 ) );
+		$this->assertEquals( 2, $this->object->divide( 6, 6 ) );
 	}
 }
