@@ -15,7 +15,7 @@ class Arithmetic {
 	/**
 	 * 引き算
 	 */
-	public function add( $x, $y ) {
+	public function subtract( $x, $y ) {
 		$ret = $x - $y;
 		return $ret;
 	}
@@ -23,7 +23,7 @@ class Arithmetic {
 	/**
 	 * 掛け算
 	 */
-	public function add( $x, $y ) {
+	public function multiply( $x, $y ) {
 		$ret = $x * $y;
 		return $ret;
 	}
@@ -31,7 +31,7 @@ class Arithmetic {
 	/**
 	 * 割り算
 	 */
-	public function add( $x, $y ) {
+	public function divide( $x, $y ) {
 		$ret = $x / $y;
 		return $ret;
 	}
