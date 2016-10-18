@@ -9,7 +9,7 @@ class Cart {
 	}
 
 	public function add( $item_cd, $amount ) {
-		if ( preg_match( '/^\d+$/', $amount ) ) {
+		if ( preg_match( '/^-?\d+$/', $amount ) ) {
 			return true;
 		} else {
 			throw new UnexpectedValueException( 'Invalid amount' );
