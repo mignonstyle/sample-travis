@@ -7,7 +7,7 @@ class Cart {
 	private $items;
 
 	public function __construct() {
-		$this->items = array();
+		$this->clear();
 	}
 
 	public function getItems() {
