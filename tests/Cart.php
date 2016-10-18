@@ -15,4 +15,8 @@ class Cart {
 			throw new UnexpectedValueException( 'Invalid amount' );
 		}
 	}
+
+	public function getAmount( $item_cd ) {
+		
+	}
 }

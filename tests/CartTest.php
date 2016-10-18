@@ -22,34 +22,7 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue( $cart->add( '001', 0 ) );
 		$this->assertTrue( $cart->add( '001', -1 ) );
 	}
-/*
-	public function testAddPositive() {
-		$cart = new Cart();
-		$this->assertTrue( $cart->add( '001', 1 ) );
-	}
 
-	public function testAddZero() {
-		$cart = new Cart();
-
-		try {
-			$cart->add( '001', 0 );
-		} catch ( OutOfBoundsException $e ) {
-			return;
-		}
-		$this->fail();
-	}
-
-	public function testAddNegative() {
-		$cart = new Cart();
-
-		try {
-			$cart->add( '001', -1 );
-		} catch ( OutOfBoundsException $e ) {
-			return;
-		}
-		$this->fail();
-	}
-*/
 	public function testAddNotNumeric() {
 		$cart = new Cart();
 
@@ -70,5 +43,15 @@ class CartTest extends PHPUnit_Framework_TestCase {
 			return;
 		}
 		$this->fail();
+	}
+
+	public function testGetAmount() {
+		$cart = new Cart();
+
+		$this->assertEquals( 0, $cart->getAmount( '001' ) );
+		$cart->add( '001', 1 );
+		$this->assertEquals( 1, $car->getAmount( '001' ) );
+
+		$this->assertEquals( 0, $cart->getAmount( '999' ) );
 	}
 }
