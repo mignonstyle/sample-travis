@@ -17,7 +17,7 @@ class CartTest extends PHPUnit_Framework_TestCase {
 
 	public function testAddPositive() {
 		$cart = new Cart();
-		$this->arrerTrue( $cart->add( '001', 1 ) );
+		$this->assertTrue( $cart->add( '001', 1 ) );
 	}
 
 	public function testAddZero() {
