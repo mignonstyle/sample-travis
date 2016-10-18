@@ -8,9 +8,37 @@
 require_once 'Cart.php';
 
 class CartTest extends PHPUnit_Framework_TestCase {
+
 	public function testInitCart() {
 		$cart = new Cart();
 		$this->assertTrue( is_array( $cart->getItems() ) );
 		$this->assertEquals( 0, count( $cart->getItems() ) );
+	}
+
+	public function testAddPositive() {
+		$cart = new Cart();
+		$this->arrerTrue( $cart->add( '001', 1 ) );
+	}
+
+	public function testAddZero() {
+		$cart = new Cart();
+
+		try {
+			$cart->add( '001', 0 );
+		} catch ( OutOfBoundsException $e ) {
+			return;
+		}
+		$this->fail();
+	}
+
+	public function testAddNegative() {
+		$cart = new Cart();
+
+		try {
+			$cart->add( '001', -1 );
+		} catch ( OutOfBoundsException $e ) {
+			return;
+		}
+		$this->fail();
 	}
 }
