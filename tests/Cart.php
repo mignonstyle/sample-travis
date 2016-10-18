@@ -11,7 +11,7 @@ class Cart {
 	}
 
 	public function getItems() {
-		return array();
+		return $this->items;
 	}
 
 	public function add( $item_cd, $amount ) {
