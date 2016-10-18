@@ -9,7 +9,7 @@ class ArrayTest extends PHPUnit_Framework_testCase {
 		$fixture = array();
 
 		// 配列のサイズは0
-		$this->assertEquals( 5, sizeof( $fixture ) );
+		$this->assertEquals( 0, sizeof( $fixture ) );
 	}
 
 	/**
