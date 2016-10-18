@@ -3,7 +3,7 @@
  *
  */
 
-class ArrayTest extends PHPUnit_Framework_testCase() {
+class ArrayTest extends PHPUnit_Framework_testCase {
 	public function testNewArrayIsEmpty() {
 		// 配列を作成
 		$fixture = array();
