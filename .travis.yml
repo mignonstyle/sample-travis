@@ -6,4 +6,5 @@ php:
   - hhvm
 
 script:
+  # phpunitでフォルダを指定したらフォルダ内にあるテストファイルが自動的に読み込まれる
   phpunit tests
