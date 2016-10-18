@@ -5,6 +5,6 @@
  */
 class Cart {
 	public function getItems() {
-
+		return array();
 	}
 }
