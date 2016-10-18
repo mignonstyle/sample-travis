@@ -23,6 +23,10 @@ class Cart {
 
 			$this->items[$item_cd] += ( int )$amount;
 
+			if ( $this->items[$item_cd] > PHP_INT_MAX ) {
+				throw new OutOfRangeException( 'the amount exceeded PHP_INT_MAX' );
+			}
+
 			if ( $this->items[$item_cd] <= 0 ) {
 				unset( $this->items[$item_cd] );
 			}
