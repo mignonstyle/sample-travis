@@ -55,7 +55,7 @@ class CartTest extends PHPUnit_Framework_TestCase {
 
 		try {
 			$cart->add( '001', 'string' );
-		} catch( OutOfBoundsException $e ) {
+		} catch( UnexpectedValueException $e ) {
 			return;
 		}
 		$this->fail();
@@ -66,7 +66,7 @@ class CartTest extends PHPUnit_Framework_TestCase {
 
 		try {
 			$cart->add( '001', 1.5 );
-		} catch( OutOfBoundsException $e ) {
+		} catch( UnexpectedValueException $e ) {
 			return;
 		}
 		$this->fail();
