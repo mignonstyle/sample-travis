@@ -33,4 +33,8 @@ class Cart {
 			return 0;
 		}
 	}
+
+	public function clear() {
+		
+	}
 }

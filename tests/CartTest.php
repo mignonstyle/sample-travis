@@ -76,4 +76,17 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 3, $items[ '001'] );
 		$this->assertEquals( 2, $items[ '002'] );
 	}
+
+	public function testClearCart() {
+		$cart = new Cart();
+
+		$cart->add( '001', 1 );
+		$cart->add( '002', 2 );
+		$cart->add( '003', 3 );
+
+		$cart->clear();
+
+		$this->assertTrue( is_array( $cart->getItems() ) );
+		$this->assertEquals( 0, count( $cart->getItems() ) );
+	}
 }
