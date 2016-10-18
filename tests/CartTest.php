@@ -4,6 +4,9 @@
  * ショッピングカートクラスを作ってみる
  * http://gihyo.jp/dev/feature/01/php-test/0002
  */
+
+require_once 'Cart.php';
+
 class CartTest extends PHPUnit_Framework_TestCase {
 	public function testInitCart() {
 		$cart = new Cart();
