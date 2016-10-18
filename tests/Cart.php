@@ -16,10 +16,17 @@ class Cart {
 
 	public function add( $item_cd, $amount ) {
 		if ( preg_match( '/^-?\d+$/', $amount ) ) {
+
 			if ( !isset( $this->items[$item_cd] ) ) {
 				$this->items[$item_cd] = 0;
 			}
+
 			$this->items[$item_cd] += ( int )$amount;
+
+			if ( $this->items[$item_cd] <= 0 ) {
+				unset( $this->items[$item_cd] );
+			}
+
 			return true;
 		} else {
 			throw new UnexpectedValueException( 'Invalid amount' );
