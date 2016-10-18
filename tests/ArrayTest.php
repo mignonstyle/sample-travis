@@ -1,6 +1,7 @@
 <?php
 /**
- *
+ * 配列のサイズを確認するテスト
+ * http://gihyo.jp/dev/feature/01/php-test/0001?page=2
  */
 
 class ArrayTest extends PHPUnit_Framework_testCase {
