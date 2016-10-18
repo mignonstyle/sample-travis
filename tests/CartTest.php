@@ -50,7 +50,7 @@ class CartTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals( 0, $cart->getAmount( '001' ) );
 		$cart->add( '001', 1 );
-		$this->assertEquals( 1, $car->getAmount( '001' ) );
+		$this->assertEquals( 1, $cart->getAmount( '001' ) );
 
 		$this->assertEquals( 0, $cart->getAmount( '999' ) );
 	}
