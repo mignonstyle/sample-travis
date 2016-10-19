@@ -15,26 +15,25 @@ class Cart {
 	}
 
 	public function add( $item_cd, $amount ) {
-		if ( preg_match( '/^-?\d+$/', $amount ) ) {
-
-			if ( !isset( $this->items[$item_cd] ) ) {
-				$this->items[$item_cd] = 0;
-			}
-
-			$this->items[$item_cd] += ( int )$amount;
-
-			if ( $this->items[$item_cd] > PHP_INT_MAX ) {
-				throw new OutOfRangeException( 'the amount exceeded PHP_INT_MAX' );
-			}
-
-			if ( $this->items[$item_cd] <= 0 ) {
-				unset( $this->items[$item_cd] );
-			}
-
-			return true;
-		} else {
+		if ( ! preg_match( '/^-?\d+$/', $amount ) ) {
 			throw new UnexpectedValueException( 'Invalid amount' );
 		}
+
+		if ( !isset( $this->items[$item_cd] ) ) {
+			$this->items[$item_cd] = 0;
+		}
+
+		$this->items[$item_cd] += ( int )$amount;
+
+		if ( $this->items[$item_cd] > PHP_INT_MAX ) {
+			throw new OutOfRangeException( 'the amount exceeded PHP_INT_MAX' );
+		}
+
+		if ( $this->items[$item_cd] <= 0 ) {
+			unset( $this->items[$item_cd] );
+		}
+
+		return true;
 	}
 
 	public function getAmount( $item_cd ) {
