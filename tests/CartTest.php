@@ -97,13 +97,13 @@ class CartTest extends PHPUnit_Framework_TestCase {
 	public function testAddUnderLimit() {
 		$this->cart->add( '001', 1 );
 		$this->assertEquals( 1, count( $this->cart->getItems() ) );
-		$cart->add( '001', -1 );
+		$this->cart->add( '001', -1 );
 		$this->assertEquals( 0, count( $this->cart->getItems() ) );
 
 		$this->cart->clear();
 		$this->cart->add( '001', 1 );
 		$this->assertEquals( 1, count( $this->cart->getItems() ) );
-		$cart->add( '001', -2 );
+		$this->cart->add( '001', -2 );
 		$this->assertEquals( 0, count( $this->cart->getItems() ) );
 	}
 
