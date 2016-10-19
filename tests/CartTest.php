@@ -9,24 +9,26 @@ require_once 'Cart.php';
 
 class CartTest extends PHPUnit_Framework_TestCase {
 
+	protected $cart;
+
+	protected function setUp() {
+		$this->cart = new Cart();
+	}
+
 	public function testInitCart() {
-		$cart = new Cart();
-		$this->assertTrue( is_array( $cart->getItems() ) );
-		$this->assertEquals( 0, count( $cart->getItems() ) );
+		$this->assertTrue( is_array( $this->cart->getItems() ) );
+		$this->assertEquals( 0, count( $this->cart->getItems() ) );
 	}
 
 	public function testAdd() {
-		$cart = new Cart();
-		$this->assertTrue( $cart->add( '001', 1 ) );
-		$this->assertTrue( $cart->add( '001', 0 ) );
-		$this->assertTrue( $cart->add( '001', -1 ) );
+		$this->assertTrue( $this->cart->add( '001', 1 ) );
+		$this->assertTrue( $this->cart->add( '001', 0 ) );
+		$this->assertTrue( $this->cart->add( '001', -1 ) );
 	}
 
 	public function testAddNotNumeric() {
-		$cart = new Cart();
-
 		try {
-			$cart->add( '001', 'string' );
+			$this->cart->add( '001', 'string' );
 		} catch ( UnexpectedValueException $e ) {
 			return;
 		}
@@ -34,10 +36,8 @@ class CartTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddFloat() {
-		$cart = new Cart();
-
 		try {
-			$cart->add( '001', 1.5 );
+			$this->cart->add( '001', 1.5 );
 		} catch ( UnexpectedValueException $e ) {
 			return;
 		}
@@ -45,57 +45,49 @@ class CartTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetAmount() {
-		$cart = new Cart();
+		$this->assertEquals( 0, $this->cart->getAmount( '001' ) );
+		$this->cart->add( '001', 1 );
+		$this->assertEquals( 1, $this->cart->getAmount( '001' ) );
 
-		$this->assertEquals( 0, $cart->getAmount( '001' ) );
-		$cart->add( '001', 1 );
-		$this->assertEquals( 1, $cart->getAmount( '001' ) );
+		$this->assertEquals( 0, $this->cart->getAmount( '999' ) );
 
-		$this->assertEquals( 0, $cart->getAmount( '999' ) );
+		$this->cart->add( '002', 1 );
+		$this->assertEquals( 1, $this->cart->getAmount( '001' ) );
+		$this->assertEquals( 1, $this->cart->getAmount( '002' ) );
 
-		$cart->add( '002', 1 );
-		$this->assertEquals( 1, $cart->getAmount( '001' ) );
-		$this->assertEquals( 1, $cart->getAmount( '002' ) );
-
-		$cart->add( '001', -1 );
-		$this->assertEquals( 0, $cart->getAmount( '001' ) );
-		$this->assertEquals( 1, $cart->getAmount( '002' ) );
+		$this->cart->add( '001', -1 );
+		$this->assertEquals( 0, $this->cart->getAmount( '001' ) );
+		$this->assertEquals( 1, $this->cart->getAmount( '002' ) );
 	}
 
 	public function testGetItems() {
-		$cart = new Cart();
+		$this->cart->add( '001', 3 );
+		$this->assertEquals( 1, count( $this->cart->getItems() ) );
 
-		$cart->add( '001', 3 );
-		$this->assertEquals( 1, count( $cart->getItems() ) );
+		$this->cart->add( '002', 2 );
+		$this->assertEquals( 2, count( $this->cart->getItems() ) );
 
-		$cart->add( '002', 2 );
-		$this->assertEquals( 2, count( $cart->getItems() ) );
-
-		$items = $cart->getItems();
+		$items = $this->cart->getItems();
 		$this->assertEquals( 3, $items[ '001'] );
 		$this->assertEquals( 2, $items[ '002'] );
 	}
 
 	public function testClearCart() {
-		$cart = new Cart();
+		$this->cart->add( '001', 1 );
+		$this->cart->add( '002', 2 );
+		$this->cart->add( '003', 3 );
 
-		$cart->add( '001', 1 );
-		$cart->add( '002', 2 );
-		$cart->add( '003', 3 );
+		$this->cart->clear();
 
-		$cart->clear();
-
-		$this->assertTrue( is_array( $cart->getItems() ) );
-		$this->assertEquals( 0, count( $cart->getItems() ) );
+		$this->assertTrue( is_array( $this->cart->getItems() ) );
+		$this->assertEquals( 0, count( $this->cart->getItems() ) );
 	}
 
 	public function testAddUpperLimit() {
-		$cart = new Cart();
-
-		$cart->add( '001', PHP_INT_MAX );
+		$this->cart->add( '001', PHP_INT_MAX );
 
 		try {
-			$cart->add( '001', 1 );
+			$this->cart->add( '001', 1 );
 		} catch ( OutOfRangeException $e ) {
 			return;
 		}
@@ -103,35 +95,31 @@ class CartTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddUnderLimit() {
-		$cart = new Cart();
-
-		$cart->add( '001', 1 );
-		$this->assertEquals( 1, count( $cart->getItems() ) );
+		$this->cart->add( '001', 1 );
+		$this->assertEquals( 1, count( $this->cart->getItems() ) );
 		$cart->add( '001', -1 );
-		$this->assertEquals( 0, count( $cart->getItems() ) );
+		$this->assertEquals( 0, count( $this->cart->getItems() ) );
 
-		$cart->clear();
-		$cart->add( '001', 1 );
-		$this->assertEquals( 1, count( $cart->getItems() ) );
+		$this->cart->clear();
+		$this->cart->add( '001', 1 );
+		$this->assertEquals( 1, count( $this->cart->getItems() ) );
 		$cart->add( '001', -2 );
-		$this->assertEquals( 0, count( $cart->getItems() ) );
+		$this->assertEquals( 0, count( $this->cart->getItems() ) );
 	}
 
 	public function testAddRemove() {
-		$cart = new Cart();
+		$this->cart->add( '001', 2 );
+		$this->cart->add( '002', 3 );
+		$this->assertEquals( 2, count( $this->cart->getItems() ) );
 
-		$cart->add( '001', 2 );
-		$cart->add( '002', 3 );
-		$this->assertEquals( 2, count( $cart->getItems() ) );
-
-		$cart->add( '001', -2 );
-		$items = $cart->getItems();
+		$this->cart->add( '001', -2 );
+		$items = $this->cart->getItems();
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertFalse( isset( $items['001'] ) );
 		$this->assertEquals( 3, $items['002'] );
 
-		$cart->add( '002', -3 );
-		$items = $cart->getItems();
+		$this->cart->add( '002', -3 );
+		$items = $this->cart->getItems();
 		$this->assertEquals( 0, count( $items ) );
 		$this->assertFalse( isset( $items['001'] ) );
 		$this->assertFalse( isset( $items['002'] ) );
