@@ -89,7 +89,6 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( 0, count( $cart->getItems() ) );
 	}
 
-/*
 	public function testAddUpperLimit() {
 		$cart = new Cart();
 
@@ -97,12 +96,12 @@ class CartTest extends PHPUnit_Framework_TestCase {
 
 		try {
 			$cart->add( '001', 1 );
-		} catch ( OutOfRangeException $e ) {
+		} catch( OutOfRangeException $e ) {
 			return;
 		}
 		$this->fail();
 	}
-*/
+
 	public function testAddUnderLimit() {
 		$cart = new Cart();
 
